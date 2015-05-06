@@ -58,12 +58,22 @@ gulp.task('scripts', function() {
     .pipe(uglify())
     .pipe(gulp.dest('./build/scripts/'));
 });
+
 // CSS concat, auto-prefix and minify
 gulp.task('template', function() {
   gulp.src(['./src/template/*.html'])
     .pipe(gulp.dest('./build/template/'));
 });
 
+gulp.task('bootstrap:prepareLess',  function() {
+  return gulp.src('src/custom/variables.less')
+    .pipe(gulp.dest('build/lib/bootstrap/less'));
+});
+gulp.task('bootstrap:compileLess', ['bootstrap:prepareLess'], function() {
+  return gulp.src('build/lib/bootstrap/less/bootstrap.less')
+    .pipe(less())
+    .pipe(gulp.dest('build/lib/bootstrap/dist/css'));
+});
 
 // CSS concat, auto-prefix and minify
 gulp.task('styles', function() {
@@ -82,7 +92,8 @@ gulp.task('mainFiles', function() {
 });
 
 // default gulp task
-gulp.task('default', ['imagemin', 'htmlpage', 'scripts', 'components','template','styles','mainFiles'], 
+gulp.task('default', ['imagemin', 'htmlpage', 'scripts', 'components',
+'template','styles','mainFiles','bootstrap:prepareLess','bootstrap:compileLess'], 
 function() {
   // watch for HTML changes
   gulp.watch('./src/*.html', function() {
