@@ -12,7 +12,7 @@ var uglify = require('gulp-uglify');
 var autoprefix = require('gulp-autoprefixer');
 var minifyCSS = require('gulp-minify-css');
 var mainBowerFiles = require('main-bower-files');
-
+var less = require('gulp-less');
 
 
 // JS hint task
@@ -65,7 +65,7 @@ gulp.task('template', function() {
     .pipe(gulp.dest('./build/template/'));
 });
 
-gulp.task('bootstrap:prepareLess',  function() {
+gulp.task('bootstrap:prepareLess', function() {
   return gulp.src('src/custom/variables.less')
     .pipe(gulp.dest('build/lib/bootstrap/less'));
 });
