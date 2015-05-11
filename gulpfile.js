@@ -66,13 +66,18 @@ gulp.task('template', function() {
 });
 
 gulp.task('bootstrap:prepareLess', function() {
-  return gulp.src('src/custom/variables.less')
+  return gulp.src('src/custom/styles.less')
     .pipe(gulp.dest('build/lib/bootstrap/less'));
 });
-gulp.task('bootstrap:compileLess', ['bootstrap:prepareLess'], function() {
-  return gulp.src('build/lib/bootstrap/less/bootstrap.less')
+gulp.task('bootstrap:compileLess', function() {
+  return gulp.src('src/custom/styles.less')
     .pipe(less())
     .pipe(gulp.dest('build/lib/bootstrap/dist/css'));
+});
+gulp.task('chemistry:compileLess', function() {
+  return gulp.src('src/custom/chemistry.less')
+    .pipe(less())
+    .pipe(gulp.dest('build/lib/css'));
 });
 
 // CSS concat, auto-prefix and minify
@@ -93,7 +98,7 @@ gulp.task('mainFiles', function() {
 
 // default gulp task
 gulp.task('default', ['imagemin', 'htmlpage', 'scripts', 'components',
-'template','styles','mainFiles','bootstrap:prepareLess','bootstrap:compileLess'], 
+'template','styles','mainFiles','bootstrap:prepareLess','bootstrap:compileLess','chemistry:compileLess'], 
 function() {
   // watch for HTML changes
   gulp.watch('./src/*.html', function() {
@@ -108,6 +113,11 @@ function() {
   // watch for CSS changes
   gulp.watch('./src/styles/*.css', function() {
     gulp.run('styles');
+  });
+  // watch for LESS changes
+  gulp.watch('./src/custom/*.less', function() {
+    gulp.run('bootstrap:compileLess');
+    gulp.run('chemistry:compileLess');
   });
 });
 
