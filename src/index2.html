@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Heip</title>
+    <title>Periodic Table</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/bootstrap/dist/css/styles.css"/>
     <link rel="stylesheet" href="lib/css/chemistry.css"/> 
@@ -16,44 +16,22 @@
 <div class="container" data-ng-controller="chemistryController">
     <h1>Periodic Elements - Directives</h1>
 
+   <div class="row">
+       <div class="col-md-offset-4"><input type="text" placeholder="search"</div></div>
+   </div>
     <div class="row">
-        <select ng-model="periodicElement" ng-options="e.name for e in elements"
-                ng-click="updateController(periodicElement)"></select><br/>
-    </div>
-    <div class="row">
-        &nbsp;
-    </div>
-    <div class="row">
-        &nbsp;
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <periodic-chart-element element="periodicElement" ></periodic-chart-element>
-        </div>
-        <div class="col-md-2">
-            &nbsp;
-        </div>
-        <div class="col-md-2">
-            <periodic-chart-element element="elements[periodicElement.atomicNumber]"  ></periodic-chart-element>
-        </div>
-        <div class="col-md-2">
-            &nbsp;
-        </div>
-        <div class="col-md-2">
-            <periodic-chart-element element="elements[periodicElement.atomicNumber+1]"></periodic-chart-element>
-        </div>
-
-    </div>
-<table>
+<table class="table table-condensed">
     <tr>
         <td><periodic-chart-element element="elements[0]"></periodic-chart-element></td>
-        <td colspan="16">&nbsp;</td>
+        <td colspan="1">&nbsp;</td>
+        <td colspan="9" rowspan="2"></periodic-chart-detail></td>
+        <td colspan="6">&nbsp;</td>
         <td><periodic-chart-element element="elements[1]"></periodic-chart-element></td>
     </tr>
     <tr> <!-- period 2-->
         <td><periodic-chart-element element="elements[2]"></periodic-chart-element></td>
         <td><periodic-chart-element element="elements[3]"></periodic-chart-element></td>
-        <td colspan="10">&nbsp;</td>
+        <td colspan="1">&nbsp;</td>
         <td><periodic-chart-element element="elements[4]"></periodic-chart-element></td>
         <td><periodic-chart-element element="elements[5]"></periodic-chart-element></td>
         <td><periodic-chart-element element="elements[6]"></periodic-chart-element></td>
@@ -194,7 +172,7 @@
 
 
 </table>
-
+</div>
 </div>
 
 <script type="text/javascript" src="components/angularjs/angular.min.js"></script>
